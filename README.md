@@ -23,18 +23,88 @@ In timing diagram Q0 is changing as soon as the negative edge of clock pulse is 
 ![image](https://github.com/naavaneetha/4-BIT-RIPPLE-COUNTER/assets/154305477/85e1958a-2fc1-49bb-9a9f-d58ccbf3663c)
 
 **Procedure**
-
-/* write all the steps invloved */
-
+```
+/* write all the steps invloved */:
+step 1: first go to qratus prime software
+step2: create folder and type the program
+step3:In the veriog you get RTL diagram
+step4:And the waveform diagram
+step 5:end the program 
+```
 **PROGRAM**
-
+```
+/* Program for 4 Bit Ripple Counter and verify its truth table in quartus using Verilog programming.:
 /* Program for 4 Bit Ripple Counter and verify its truth table in quartus using Verilog programming.
+
+module exp12(
+   input wire clk,  // Clock input
+   output reg [3:0] count // 4-bit counter output
+);
+
+// Counter logic
+always @(posedge clk) begin
+   if (count == 4'b1111) // Reset when count reaches 15
+       count <= 4'b0000;
+   else
+       count <= count + 1; // Increment count
+end
+
+endmodule
+
+// Testbench
+module RippleCounter_tb;
+
+// Inputs
+reg clk;
+
+// Outputs
+wire [3:0] count;
+
+// Instantiate the counter
+RippleCounter uut(
+   .clk(clk),
+   .count(count)
+);
+
+// Clock generation
+initial begin
+   clk = 0;
+   forever #5 clk = ~clk; // Toggle clock every 5 time units
+end
+
+// Stimulus
+initial begin
+   // Wait for a few clock cycles
+   #10;
+   
+   // Display header
+   $display("Time | Count");
+   $display("-----------------");
+   
+   // Functional table testing
+   // Increment count 16 times and display the count
+   repeat (16) begin
+       #5; // Wait for one clock cycle
+       $display("%4d | %b", $time, count);
+   end
+   
+   // End simulation
+   $finish;
+end
+
+endmodule
+````
 
  Developed by: RegisterNumber:
 */
 
-**RTL LOGIC FOR 4 Bit Ripple Counter**
+**RTL LOGIC FOR 4 Bit Ripple Counter**:
+![de 12](https://github.com/user-attachments/assets/da111b44-c59c-4807-ab53-ced8fe8060bc)
 
-**TIMING DIGRAMS FOR 4 Bit Ripple Counter**
 
-**RESULTS**
+
+**TIMING DIGRAMS FOR 4 Bit Ripple Counter**:
+![de o](https://github.com/user-attachments/assets/4905b620-55aa-4abb-b6ed-e1a83f9a258b)
+
+**RESULTS**:
+Thus the  4-BIT-RIPPLE-COUNTER are verified.
